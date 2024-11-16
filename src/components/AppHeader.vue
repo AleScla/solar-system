@@ -1,20 +1,29 @@
 <script>
+import NavBar from './minor_components/NavBar.vue'
 export default {
   data() {
-    return { 
-      
-    }
-  }
+    
+  },
+  
+  // 2) Dichiarazione del componente
+  components: {
+    NavBar
+  },
 }
 </script>
 
+
 <template>
-  <header>
-   
-  </header>
+  <NavBar />
 </template>
 
+
+
+
+
 <style lang="scss" scoped>
-@use '../assets/scss/partials/variables' as *;
+  template > *{
+    text-decoration:none;
+  }
 
 </style>
