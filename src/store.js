@@ -10,6 +10,34 @@ export const store = reactive ({
             name: 'Uranus',
             img: '/uranus.png'
         },
+        {
+            name: 'Saturn',
+            img: '/saturn.png'
+        },
+        {
+            name: 'Jupiter',
+            img: '/jupiter.webp'
+        },
+        {
+            name: 'Mars',
+            img: '/mars.png'
+        },
+        {
+            name: 'Earth',
+            img: '/earth.png'
+        },
+        {
+            name: 'Venus',
+            img: '/venus.webp'
+        },
+        {
+            name: 'Mercury',
+            img: '/mercury.png'
+        },
+        {
+            name: 'Sun',
+            img: '/sun.png'
+        },
     ],
-    x: 
+    
 })
