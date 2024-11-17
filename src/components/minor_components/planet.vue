@@ -1,9 +1,24 @@
 <script>
+import {store} from '../../store';
 
 export default {
+    data() {
+    return{
+        store,
+    }
+  },
     props:{
         image: String,
         name: String,
+    },
+    methods:{
+        showInfo(planetName){
+            this.store.showPlanet = true;
+            this.store.planetInfo = planetName
+        },
+        hideInfo(){
+            this.store.showPlanet = false;
+        }
     }
 }
 </script>
@@ -12,7 +27,7 @@ export default {
 <template>
     <div class="planet" :class="name">
         <div class="img-container">
-            <img :src="image" :alt="name">  
+            <img :src="image" :alt="name" v-on:mouseover="showInfo(name);" v-on:mouseleave="hideInfo()">  
         </div>
     </div>
     
@@ -26,11 +41,13 @@ export default {
     height:100%;
     animation:rotate linear infinite;
     border-radius:50%;
+    
     .img-container{
         img{
             position:absolute;
             left:50%;
             transform:translateX(-50%);
+            cursor:pointer;
         }
     }
 }

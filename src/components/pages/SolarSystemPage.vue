@@ -6,30 +6,22 @@ export default {
   data() {
     return{
         store,
-        showPlanet:false,
-        planetInfo:''
     }
   },
   components: {
     Planet
   },
   methods:{
-    showInfo(planetName){
-        this.showPlanet = true;
-        this.planetInfo = planetName
-    },
-    hideInfo(){
-        this.showPlanet = false;
-    }
+  
   }
 }
 </script>
 
 <template>
     <div class="universe">
-        <div v-show="showPlanet" class="info">{{ planetInfo }}</div>
+        <div v-show="store.showPlanet" class="info">{{ store.planetInfo, console.log(store.planetInfo) }}</div>
         <section id="solar-system">
-            <div v-for="planet, index in store.allPlanets" :key="index" :id="'orbit-' + index" class="orbit-generic" v-on:mouseover="showInfo(planet.name)" v-on:mouseleave="hideInfo()">
+            <div v-for="planet, index in store.allPlanets" :key="index" :id="'orbit-' + index" class="orbit-generic" >
                 <Planet :name="planet.name" :image="planet.img" />
             </div>
         </section>
@@ -55,8 +47,7 @@ export default {
     left:50%;
     transform:translate(-50%, -50%);
     border:2px solid white;
-    cursor:pointer;
-    z-index:-1; 
+
 }
 #orbit-0{
     width:41vw;
@@ -95,7 +86,7 @@ export default {
 }
 
 .Neptune{
-    animation-duration:900s;
+    animation-duration:1000s;
     .img-container{
         img{
         width:40px;
@@ -104,7 +95,7 @@ export default {
     }
 }
 .Uranus{
-    animation-duration:800s;
+    animation-duration:850s;
     .img-container{
         img{
         width:40px;
@@ -113,7 +104,7 @@ export default {
     }
 }
 .Saturn{
-    animation-duration:700s;
+    animation-duration:750s;
     .img-container{
         img{
         width:70px;
@@ -121,7 +112,6 @@ export default {
         }
     }
 }
-
 .Jupiter{
     animation-duration:600s;
     .img-container{
@@ -164,13 +154,13 @@ export default {
         img{
         width:30px;
         top:-15px;
+
         }
     }
 }
 .Sun{
     .img-container{
-        width:13rem;
-        overflow:hidden;
+        width:11rem;
         img{
             top:50%;
             transform:translate(-50%, -50%);
@@ -180,9 +170,13 @@ export default {
 .info{
     min-width:20px;
     min-height:20px;
-    background-color:white;
     position:fixed;
     top:15vh;
     left:10vh;
+    font-size:2rem;
+    background-color:#072242;
+    color:white;
+    padding:5px;
+    border-radius:10px;
 }
 </style>

@@ -39,5 +39,6 @@ export const store = reactive ({
             img: '/sun.png'
         },
     ],
-    
+    planetInfo:'',
+    showPlanet:false,
 })

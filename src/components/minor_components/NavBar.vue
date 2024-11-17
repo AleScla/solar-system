@@ -42,8 +42,9 @@ const links = [
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <img class="h-16 w-auto" id="navbar-img" src="/public/earth.svg" alt="solar_sistem_icon" />
+            <img class="h-16 w-auto" id="navbar-img" src="/earth.svg" alt="solar_sistem_icon" />
           </div>
+          <img id="navbar-img-2" src="/solar-system.png" alt="solar_sistem_icon" />
           <div class="hidden sm:ml-6 sm:block">
             <div class="d-flex align-items-center h-full">
               <router-link v-for="link, index in navigation" :to="{ name: link.name }" :key="index" class="no-underline text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">
@@ -86,6 +87,10 @@ const links = [
 <style lang="scss">
     #navbar-img{
         filter: invert(100%);
+    }
+    #navbar-img-2{
+      width:300px;
+      padding:20px;
     }
     #menubutton:hover #my-links{
         color:white;
