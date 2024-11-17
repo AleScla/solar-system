@@ -22,8 +22,6 @@ export default {
 
 
 <style lang="scss" scoped>
-  template > *{
-    text-decoration:none;
-  }
+
 
 </style>
