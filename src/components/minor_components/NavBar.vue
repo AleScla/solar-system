@@ -44,7 +44,7 @@ const links = [
           <div class="flex shrink-0 items-center">
             <img class="h-16 w-auto" id="navbar-img" src="/earth.svg" alt="solar_sistem_icon" />
           </div>
-          <img id="navbar-img-2" src="/solar-system.png" alt="solar_sistem_icon" />
+          <img id="navbar-img-2" src="/solar-system.png" class="d-none d-md-block" alt="solar_sistem_icon" />
           <div class="hidden sm:ml-6 sm:block">
             <div class="d-flex align-items-center h-full">
               <router-link v-for="link, index in navigation" :to="{ name: link.name }" :key="index" class="no-underline text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">
@@ -65,9 +65,9 @@ const links = [
               </MenuButton>
             </div>
             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute  right-0 z-10 mt-2 w-48 origin-top-right  rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
+              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
                 <MenuItem v-for="link, index in links" :key="index" v-slot="{ active }">
-                  <a target="_blank" :href="link.href" :class="[active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm text-gray-700']" class="no-underline">{{ link.label }}</a>
+                  <a target="_blank" :href="link.href" :class="[active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm text-gray-700']" class="no-underline position-relative">{{ link.label }}</a>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -76,7 +76,7 @@ const links = [
       </div>
     </div>
 
-    <DisclosurePanel class="sm:hidden">
+    <DisclosurePanel class="sm:hidden z-3 position-relative bg-gray-800">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <DisclosureButton v-for="item, index in navigation" :key="index" as="a" :href="item.path" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']" :aria-current="item.current ? 'page' : undefined" class="no-underline">{{ item.label }}</DisclosureButton>
       </div>
@@ -85,6 +85,7 @@ const links = [
 </template>
 
 <style lang="scss">
+    
     #navbar-img{
         filter: invert(100%);
     }
