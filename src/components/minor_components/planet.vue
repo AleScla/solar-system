@@ -25,42 +25,27 @@ export default {
 
 
 <template>
-    <div class="planet" :class="name">
+    <div class="planet d-flex justify-content-center" :class="name">
         <div class="img-container">
-            <img :src="image" :alt="name" v-on:mouseover="showInfo(name);" v-on:mouseleave="hideInfo()">  
+            <img :src="image" :alt="name">  
         </div>
     </div>
     
 </template>
-
+<!-- v-on:mouseover="showInfo(name);" v-on:mouseleave="hideInfo()" -->
 
 <style lang="scss">
-
-.planet{
-    width:100%;
-    height:100%;
-    animation:rotate linear infinite;
-    border-radius:50%;
-    
-    .img-container{
-        img{
-            position:absolute;
-            left:50%;
-            transform:translateX(-50%);
-            cursor:pointer;
+    .planet{
+        max-height:100%;
+        max-width:100%;
+        .img-container{
+            max-width:480px;
+            max-height:480px;
+            img{
+                max-width:100%;
+                max-height:100%;
+            }
         }
     }
-}
 
-    @keyframes rotate{
-        0%{
-            transform:rotate(0)
-        }
-        50%{
-            transform:rotate(180deg)
-        }
-        100%{
-            transform:rotate(360deg)
-        }
-    }
 </style>
