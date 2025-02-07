@@ -3,39 +3,39 @@ import {reactive} from 'vue';
 export const store = reactive ({
     allPlanets:[
         {
-            name: 'Neptune',
-            img: '/neptune.webp'
+            name: 'Nettuno',
+            img: '/neptune.png'
         },
         {
-            name: 'Uranus',
+            name: 'Urano',
             img: '/uranus.png'
         },
         {
-            name: 'Saturn',
+            name: 'Saturno',
             img: '/saturn.png'
         },
         {
-            name: 'Jupiter',
-            img: '/jupiter.webp'
+            name: 'Giove',
+            img: '/jupiter.png'
         },
         {
-            name: 'Mars',
+            name: 'Marte',
             img: '/mars.png'
         },
         {
-            name: 'Earth',
+            name: 'Terra',
             img: '/earth.png'
         },
         {
-            name: 'Venus',
-            img: '/venus.webp'
+            name: 'Venere',
+            img: '/venus.png'
         },
         {
-            name: 'Mercury',
+            name: 'Mercurio',
             img: '/mercury.png'
         },
         {
-            name: 'Sun',
+            name: 'Sole',
             img: '/sun.png'
         },
     ],
