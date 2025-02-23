@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
 import axios from 'axios';
+import Meteors from '../minor_components/Meteors.vue'
 
 export default {
   data() {
@@ -12,80 +13,93 @@ export default {
         store,
         api,
         modules: [EffectCoverflow, Autoplay],
-       
+        
     }
   },
   components: {
     Planet,
     Swiper,
     SwiperSlide,
+    Meteors
   },
   methods: {
     
   },
   mounted(){
     this.api.getAllPlanets();
+    
   },
 }
 </script>
 
 <template>
     <div class="universe">
-        <section id="solar-system" class="d-flex align-items-center" v-show="api.showCarousel">
-            <!-- <div v-for="planet, index in store.allPlanets" :key="index" :id="'orbit-' + index" class="orbit-generic">
-                <Planet :name="planet.name" :image="planet.img" />
-            </div> -->
-            <Swiper class="custom-swiper-classes" 
-            :modules="modules"
-            :slides-per-view="1" 
-            :breakpoints="{
-                768:{
-                    slidesPerView: 3
-                },
-                992:{
-                    slidesPerView: 5
-                }
-            }"
-            :autoplay="{
-                delay: 5000,
-                pauseOnMouseEnter: true,
-            }"
-            :effect="'coverflow'"
-            :grabCursor="true"
-            :centeredSlides="true"
-            :coverflow-effect="{rotate: 0, stretch: -100, depth: 200, modifier: 1.5, scale: 0.8, slideShadows: false }"
-            :initialSlide="3"
-            :center-insufficient-slides="true"
-            :loop="true"
-            :observer="true"
-            :observe-parents="true"
-            :speed="800"> 
-            <!-- observer e observe-parents sono serviti perchè l'effetto coverflow non veniva renderizzato al primo reload della pagina, finchè non si interagiva con il carosello -->
-                <SwiperSlide class="custom-class-slide" v-for="planet, index in store.allPlanets" :key="index">
-                    <router-link :to="{name: 'planet', params:{ name: store.allPlanets[index].name}}">
-                        <Planet :planetHover="planet" :image="store.allPlanets[index].img"/>
-                    </router-link>
-                </SwiperSlide>
-            </Swiper>
-            <transition >
-                <div id="info" v-if="store.showPlanet">
-                    {{ store.planetInfo }}
-                </div>
-            </transition>
-        </section>
+        <Meteors></Meteors>
+            <section id="solar-system" class="d-flex align-items-center" v-if="api.showCarousel">
+                
+                <Swiper class="custom-swiper-classes" 
+                :modules="modules"
+                :slides-per-view="1" 
+                :breakpoints="{
+                    768:{
+                        slidesPerView: 3
+                    },
+                    992:{
+                        slidesPerView: 5
+                    }
+                }"
+                :autoplay="{
+                    delay: 5000,
+                    pauseOnMouseEnter: true,
+                }"
+                :effect="'coverflow'"
+                :grabCursor="true"
+                :centeredSlides="true"
+                :coverflow-effect="{rotate: 0, stretch: -100, depth: 200, modifier: 1.5, scale: 0.8, slideShadows: false }"
+                :initialSlide="3"
+                :center-insufficient-slides="true"
+                :loop="true"
+                :observer="true"
+                :observe-parents="true"
+                :speed="800"> 
+                <!-- observer e observe-parents sono serviti perchè l'effetto coverflow non veniva renderizzato al primo reload della pagina, finchè non si interagiva con il carosello -->
+                    <SwiperSlide class="custom-class-slide" v-for="planet, index in store.allPlanets" :key="index">
+                        <router-link :to="{name: 'planet', params:{ name: store.allPlanets[index].name}}">
+                            <Planet :image="store.allPlanets[index].img" :planetDetails="api?.storedPlanets[index]"/>
+                        </router-link>
+                    </SwiperSlide>
+                </Swiper>
+                
+                <transition>
+                    <div id="info" v-if="store.showPlanet">
+                        <div>
+                            Nome: <strong>{{ store.planetInfo.name }}</strong>
+                        </div>
+                        <div>
+                            Massa in kg: <strong>{{ store.planetInfo.mass_kg }} kg</strong>
+                        </div>
+                        <div>
+                            Diametro: <strong>{{ store.planetInfo.diameter_km }} km</strong>
+                        </div>
+                        <div>
+                            Temperatura media: <strong>{{ store.planetInfo.avg_temp }}°c</strong>
+                        </div>
+                    </div>
+                </transition>
+            </section>
+        
     </div>
 </template>
 
 <style lang="scss">
 .universe{
-    background-color:#01050a;
     position:relative;
 }
 #solar-system{
-
     height: calc(100vh - 4rem);
     position:relative;
     overflow:hidden;
+    z-index:1;
     width:90%;
     margin:auto;
     #info{
@@ -103,6 +117,7 @@ export default {
     .custom-swiper-classes{
         height:100%;
         top:10%;
+        z-index:10;
     }
 }
 
@@ -120,16 +135,4 @@ export default {
     transform:translate(-50%, -30px);
 }
 
-// .info{
-//     min-width:20px;
-//     min-height:20px;
-//     position:fixed;
-//     top:70vh;
-//     left:10vh;
-//     font-size:2rem;
-//     background-color:#072242;
-//     color:white;
-//     padding:5px;
-//     border-radius:10px;
-// }
 </style>
