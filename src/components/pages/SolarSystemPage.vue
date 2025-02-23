@@ -62,15 +62,16 @@ export default {
             :speed="800"> 
             <!-- observer e observe-parents sono serviti perchè l'effetto coverflow non veniva renderizzato al primo reload della pagina, finchè non si interagiva con il carosello -->
                 <SwiperSlide class="custom-class-slide" v-for="planet, index in store.allPlanets" :key="index">
-                    <Planet :planetHover="planet.name" :image="store.allPlanets[index].img"/>
-                    
+                    <router-link :to="{name: 'planet', params:{ name: store.allPlanets[index].name}}">
+                        <Planet :planetHover="planet" :image="store.allPlanets[index].img"/>
+                    </router-link>
                 </SwiperSlide>
             </Swiper>
             <transition >
-                        <div id="info" v-if="store.showPlanet">
-                            {{ store.planetInfo }}
-                        </div>
-                    </transition>
+                <div id="info" v-if="store.showPlanet">
+                    {{ store.planetInfo }}
+                </div>
+            </transition>
         </section>
     </div>
 </template>
@@ -81,10 +82,12 @@ export default {
     position:relative;
 }
 #solar-system{
-    width:100%;
+
     height: calc(100vh - 4rem);
     position:relative;
     overflow:hidden;
+    width:90%;
+    margin:auto;
     #info{
         position:absolute;
         left:50%;
