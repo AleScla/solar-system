@@ -9,12 +9,14 @@ export default {
   },
     props:{
         image: String,
+        planetDetails: Array,
         
-        planetHover: Array,
     },
     methods:{
         showPlanetInfo(){
             this.store.showPlanet = true;
+            this.store.planetInfo = this.planetDetails;
+            console.log(this.store.planetInfo);
         },
         hidePlanetInfo(){
             this.store.showPlanet = false;
@@ -26,7 +28,7 @@ export default {
 <template>
     
     <div class="planet d-flex justify-content-center" :class="name">
-        <div class="img-container">
+        <div class="img-container" @click="store.showPlanet = false">
             <img :src="image" :alt="name" v-on:mouseover="showPlanetInfo" v-on:mouseleave="hidePlanetInfo()">  
         </div>
     </div>
