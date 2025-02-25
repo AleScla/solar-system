@@ -1,5 +1,6 @@
 import {reactive} from 'vue';
 import axios from 'axios';
+import {router } from './router';
 
 export const store = reactive ({
     allPlanets:[
@@ -40,8 +41,14 @@ export const store = reactive ({
             img: '/neptune.png'
         },
     ],
-    planetInfo:'',
+    planetInfo:null,
     showPlanet:false,
+    redirectIfNotSet() {
+        if (!this.planetInfo) {
+            router.push('/');
+        
+        }
+    },
 })
 
 export const api = reactive ({
