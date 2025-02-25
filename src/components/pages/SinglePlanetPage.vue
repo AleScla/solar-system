@@ -1,6 +1,6 @@
-
 <script>
-import {store, api} from '../../store';
+import {store} from '../../store';
+
 export default {
   data() {
     return{
@@ -16,20 +16,22 @@ export default {
           this[target] = originalText.substring(0, i);
         }, i * 1);
       }
-    }
-
+    },
   },
   mounted(){
-    this.textPrinter('descriptionPrint', this.store.planetInfo.description)
+    this.store.redirectIfNotSet();
+    if(this.store.planetInfo){
+      this.textPrinter('descriptionPrint', this.store.planetInfo?.description)
+    }
   },
 }
 </script>
 
 <template>
-  <main>
+  <main v-if="store.planetInfo">
     <div class="video-container">
       <video autoplay muted >
-        <source :src="store.planetInfo.video">
+        <source :src="store?.planetInfo?.video">
       </video>
     </div>
     <div class="h-100 w-100">
@@ -37,15 +39,15 @@ export default {
         <div class="content h-100 row align-items-center">
           <div class="col-12 col-md-4 h-75 left d-flex align-items-center justify-content-center flex-wrap">
             <div class="text-center planet-info">
-              <h1>{{ store.planetInfo.name.toUpperCase() }}</h1>
-              <div>Massa: <strong>{{ store.planetInfo.mass_kg }} KG</strong></div>
-              <div>Diametro: <strong>{{ store.planetInfo.diameter_km }} KM</strong></div>
-              <div>Distanza dal sole: <strong>{{ store.planetInfo.sun_distance }} KM</strong></div>
-              <div>Periodo di rivoluzione: <strong>{{ store.planetInfo.orbital_days }} giorni</strong></div>
-              <div>Lune: <strong>{{ store.planetInfo.moons }}</strong></div>
-              <div>Composizione atmosferica: <strong>{{ store.planetInfo.atmosphere }}</strong></div>
-              <div>Temperatura media: <strong>{{ store.planetInfo.avg_temp }}</strong></div>
-              <div>Tipologia: <strong>{{ store.planetInfo.type.planet_type }}</strong></div>
+              <h1>{{ store?.planetInfo.name }}</h1>
+              <div>Massa: <strong>{{ store?.planetInfo.mass_kg }} KG</strong></div>
+              <div>Diametro: <strong>{{ store?.planetInfo.diameter_km }} KM</strong></div>
+              <div v-show="store?.planetInfo.sun_distance > 0">Distanza dal sole: <strong>{{ store?.planetInfo.sun_distance }} KM</strong></div>
+              <div v-show="store?.planetInfo.name != 'Sole'">Periodo di rivoluzione: <strong>{{ store?.planetInfo.orbital_days }} giorni</strong></div>
+              <div v-show="store?.planetInfo.moons > 0">Lune: <strong>{{ store?.planetInfo.moons }}</strong></div>
+              <div>Composizione atmosferica: <strong>{{ store?.planetInfo.atmosphere }}</strong></div>
+              <div>Temperatura media: <strong>{{ store?.planetInfo.avg_temp }}</strong></div>
+              <div>Tipologia: <strong>{{ store?.planetInfo.type.planet_type }}</strong></div>
             </div>
           </div>
           <div class="col-12 col-md-8 h-75 right text-center text-white fw-bold pt5">
