@@ -56,6 +56,7 @@ export const api = reactive ({
             console.log(res.data[0].name);
        }).catch((error)=>{
         console.error('Errore nella richiesta del singolo pianeta', error);
+        router.push({name: 'not-found'})
        })
     },
     async getAllPlanets(){
