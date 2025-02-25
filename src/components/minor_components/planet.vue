@@ -9,7 +9,7 @@ export default {
   },
     props:{
         image: String,
-        planetDetails: Array,
+        planetDetails: Object,
         
     },
     methods:{
@@ -27,9 +27,9 @@ export default {
 
 <template>
     
-    <div class="planet d-flex justify-content-center" :class="name">
+    <div class="planet d-flex justify-content-center">
         <div class="img-container" @click="store.showPlanet = false">
-            <img :src="image" :alt="name" v-on:mouseover="showPlanetInfo" v-on:mouseleave="hidePlanetInfo()">  
+            <img :src="image" v-on:mouseover="showPlanetInfo" v-on:mouseleave="hidePlanetInfo()">  
         </div>
     </div>
 </template>
