@@ -1,11 +1,27 @@
+
 <script>
 import {store, api} from '../../store';
 export default {
   data() {
     return{
       store,
+      descriptionPrint: '',
+    } 
+  },
+  methods: {
+    textPrinter(target, originalText){
+      for (let i = 0; i <= originalText.length; i++){
+        // target serve a passare il valore della variabile in data come stringa, altrimenti il dato non viene aggiornato. in questo modo il target va a reperire la variabile descriptionPrint dal data e si può aggiornare dinamicamente
+        setTimeout(() => {
+          this[target] = originalText.substring(0, i);
+        }, i * 1);
+      }
     }
-  }
+
+  },
+  mounted(){
+    this.textPrinter('descriptionPrint', this.store.planetInfo.description)
+  },
 }
 </script>
 
@@ -19,10 +35,22 @@ export default {
     <div class="h-100 w-100">
       <div class="container h-100">
         <div class="content h-100 row align-items-center">
-          <div class="col-12 col-md-4 h-75 left">1</div>
-          <div class="col-12 col-md-8 h-75 right text-center text-white fw-bold d-flex align-items-center">
-            <p class="mt-3">
-              {{ store.planetInfo.description }}
+          <div class="col-12 col-md-4 h-75 left d-flex align-items-center justify-content-center flex-wrap">
+            <div class="text-center planet-info">
+              <h1>{{ store.planetInfo.name.toUpperCase() }}</h1>
+              <div>Massa: <strong>{{ store.planetInfo.mass_kg }} KG</strong></div>
+              <div>Diametro: <strong>{{ store.planetInfo.diameter_km }} KM</strong></div>
+              <div>Distanza dal sole: <strong>{{ store.planetInfo.sun_distance }} KM</strong></div>
+              <div>Periodo di rivoluzione: <strong>{{ store.planetInfo.orbital_days }} giorni</strong></div>
+              <div>Lune: <strong>{{ store.planetInfo.moons }}</strong></div>
+              <div>Composizione atmosferica: <strong>{{ store.planetInfo.atmosphere }}</strong></div>
+              <div>Temperatura media: <strong>{{ store.planetInfo.avg_temp }}</strong></div>
+              <div>Tipologia: <strong>{{ store.planetInfo.type.planet_type }}</strong></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-8 h-75 right text-center text-white fw-bold pt5">
+            <p>
+              {{ descriptionPrint }}
             </p>
           </div>
         </div>
@@ -32,6 +60,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
   main{
     width:100%;
     height:calc(100vh - 4rem);
@@ -60,6 +89,17 @@ export default {
   background-color:#555555b2;
   border-top-left-radius:5px;
   border-bottom-left-radius:5px;
+  
+  .planet-info{
+    animation: changeOpacity 1s linear;
+    h1{
+      color:rgb(87, 227, 255);
+    }
+  }
+  @keyframes changeOpacity{
+    from{opacity: 0;}
+    to{opacity:1;}
+  }
 }
 
 .right{
