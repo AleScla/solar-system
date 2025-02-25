@@ -13,7 +13,7 @@ const router = createRouter({
             component: SolarSystemPage
         },
         {
-            path:'/:name',
+            path:'/Pianeta/:name',
             name:'planet',
             component: SinglePlanetPage
         },
