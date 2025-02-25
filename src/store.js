@@ -43,19 +43,23 @@ export const store = reactive ({
     ],
     planetInfo:null,
     showPlanet:false,
-    redirectIfNotSet() {
-        if (!this.planetInfo) {
-            router.push('/');
-        
-        }
-    },
+   
 })
 
 export const api = reactive ({
     showCarousel: false, // necessario per non buggare il carousel, visto che riceveva i dati da una chiamata api
     storedPlanets: [],
-    getAllPlanets(){
-        axios.get("http://127.0.0.1:8000/api/planets")
+    clickedApartment: null,
+    async getSinglePlanet(param){
+       await axios.get("http://127.0.0.1:8000/api/planets/"+param).then((res)=> {
+            store.planetInfo = res.data[0];
+            console.log(res.data[0].name);
+       }).catch((error)=>{
+        console.error('Errore nella richiesta del singolo pianeta', error);
+       })
+    },
+    async getAllPlanets(){
+        await axios.get("http://127.0.0.1:8000/api/planets")
         .then((resp)=> {
             // console.log(resp.data);
             this.storedPlanets = resp.data;

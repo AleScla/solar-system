@@ -1,10 +1,12 @@
 <script>
-import {store} from '../../store';
-
+import {store, api} from '../../store';
+import {router} from '../../router';
 export default {
   data() {
     return{
       store,
+      api,
+      router,
       descriptionPrint: '',
     } 
   },
@@ -19,10 +21,13 @@ export default {
     },
   },
   mounted(){
-    this.store.redirectIfNotSet();
-    if(this.store.planetInfo){
+    // this.store.redirectIfNotSet();
+    this.api.getSinglePlanet(this.$route.params.name);
+    setTimeout(() => {
+      if(this.store.planetInfo){
       this.textPrinter('descriptionPrint', this.store.planetInfo?.description)
     }
+    }, 500);
   },
 }
 </script>
@@ -46,7 +51,7 @@ export default {
               <div v-show="store?.planetInfo.name != 'Sole'">Periodo di rivoluzione: <strong>{{ store?.planetInfo.orbital_days }} giorni</strong></div>
               <div v-show="store?.planetInfo.moons > 0">Lune: <strong>{{ store?.planetInfo.moons }}</strong></div>
               <div>Composizione atmosferica: <strong>{{ store?.planetInfo.atmosphere }}</strong></div>
-              <div>Temperatura media: <strong>{{ store?.planetInfo.avg_temp }}</strong></div>
+              <div>Temperatura media: <strong>{{ store?.planetInfo.avg_temp }} °c</strong></div>
               <div>Tipologia: <strong>{{ store?.planetInfo.type.planet_type }}</strong></div>
             </div>
           </div>
