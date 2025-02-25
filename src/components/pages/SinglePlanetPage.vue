@@ -36,7 +36,7 @@ export default {
   <main v-if="store.planetInfo">
     <div class="video-container">
       <video autoplay muted >
-        <source :src="store?.planetInfo?.video">
+        <source :src="store.planetInfo.video">
       </video>
     </div>
     <div class="h-100 w-100">
@@ -53,6 +53,8 @@ export default {
               <div>Composizione atmosferica: <strong>{{ store?.planetInfo.atmosphere }}</strong></div>
               <div>Temperatura media: <strong>{{ store?.planetInfo.avg_temp }} °c</strong></div>
               <div>Tipologia: <strong>{{ store?.planetInfo.type.planet_type }}</strong></div>
+              <div>Wikipedia: <strong><a target="_blank" :href="store?.planetInfo.link">Link</a></strong></div>
+
             </div>
           </div>
           <div class="col-12 col-md-8 h-75 right text-center text-white fw-bold pt5">
@@ -96,6 +98,7 @@ export default {
   background-color:#555555b2;
   border-top-left-radius:5px;
   border-bottom-left-radius:5px;
+  overflow-y:auto;
   
   .planet-info{
     animation: changeOpacity 1s linear;
@@ -116,25 +119,29 @@ export default {
   padding:1rem;
   overflow-y:auto;
 }
-.right::-webkit-scrollbar {
+a{
+  color:rgb(87, 227, 255);
+  text-decoration:none;
+}
+.right::-webkit-scrollbar, .left::-webkit-scrollbar {
   width: 5px;
 }
-.right::-webkit-scrollbar-track {
+.right::-webkit-scrollbar-track, .left::-webkit-scrollbar {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
-.right::-webkit-scrollbar-thumb {
+.right::-webkit-scrollbar-thumb, .left::-webkit-scrollbar{
   background: white;
   border-radius: 10px;
 }
-.right::-webkit-scrollbar-thumb:hover {
+.right::-webkit-scrollbar-thumb:hover, .left::-webkit-scrollbar {
   background: #555;
 }
 
 
 @media (max-width: 768px) {
   .left{
-    height:35% !important;
+    height:45% !important;
     border-radius:5px;
   }
   .right{
