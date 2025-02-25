@@ -13,7 +13,7 @@ export default {
         store,
         api,
         modules: [EffectCoverflow, Autoplay],
-        
+        myDelay: 100,
     }
   },
   components: {
@@ -23,11 +23,16 @@ export default {
     Meteors
   },
   methods: {
-    
+    setDelay(){ // serve per evitare che si bugghi il carosello al primo avvio
+        setTimeout(() => {
+            this.myDelay = 5000;
+        }, 300);
+        console.log(this.myDelay);
+    }
   },
   mounted(){
     this.api.getAllPlanets();
-    
+    this.setDelay();
   },
 }
 </script>
@@ -36,8 +41,8 @@ export default {
     <div class="universe">
         <Meteors></Meteors>
             <section id="solar-system" class="d-flex align-items-center" v-if="api.showCarousel">
-                
-                <Swiper class="custom-swiper-classes" 
+                <Swiper class="custom-swiper-classes"
+                refs="swiperRef" 
                 :modules="modules"
                 :slides-per-view="1" 
                 :breakpoints="{
@@ -49,7 +54,7 @@ export default {
                     }
                 }"
                 :autoplay="{
-                    delay: 5000,
+                    delay: myDelay,
                     pauseOnMouseEnter: true,
                 }"
                 :effect="'coverflow'"
