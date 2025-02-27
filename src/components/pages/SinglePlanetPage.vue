@@ -101,7 +101,7 @@ export default {
   overflow-y:auto;
   
   .planet-info{
-    animation: changeOpacity 1s linear;
+    animation: changeOpacity 2s linear;
     h1{
       color:rgb(87, 227, 255);
     }
